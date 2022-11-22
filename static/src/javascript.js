@@ -1,7 +1,7 @@
 window.onload = function () {
     const navItems = document.getElementById('nav-items');
     const hamburger = document.getElementById('burger-icon');
-    let menuShow = true;
+    let menuShow = false;
 
     function toggleMenu() {
         console.log('CLICK')
@@ -19,6 +19,10 @@ window.onload = function () {
     window.addEventListener("resize", function () {
         if (window.matchMedia("(min-width: 1024px)").matches) {
             navItems.style.display = "block";
+            menuShow = true;
+        } else {
+            navItems.style.display = "none";
+            menuShow = false;
         }
     })
 };

@@ -4,7 +4,6 @@ window.onload = function () {
     let menuShow = false;
 
     function toggleMenu() {
-        console.log('CLICK')
         if (menuShow) {
             navItems.style.display = 'none';
             menuShow = false;

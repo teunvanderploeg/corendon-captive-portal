@@ -25,19 +25,40 @@
 
     <div id="nav-items" class="hidden lg: w-full block flex-grow lg:flex lg:items-center lg:w-auto">
         <div class="text-sm lg:flex-grow lg:text-right font-bold pb-6 lg:pb-0">
-            <a href="/" class="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-gray-500 mr-4 text-l  border-b-2 border-red-600 lg:border-0">
+            <a href="/"
+               class="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-gray-500 mr-4 text-l  border-b-2 border-red-600 lg:border-0">
                 Home
             </a>
-            <a href="/info" class="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-gray-500 mr-4 text-l border-b-2 border-red-600 lg:border-0">
+            <a href="/info"
+               class="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-gray-500 mr-4 text-l border-b-2 border-red-600 lg:border-0">
                 Info
             </a>
-            <a href="/login" class="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-gray-500 mr-4 text-l border-b-2 border-red-600 lg:border-0">
-                Login
-            </a>
+            {% if session['name'] %}
+                <a href="/logout"
+                   class="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-gray-500 mr-4 text-l border-b-2 border-red-600 lg:border-0">
+                    logout
+                </a>
+            {% else %}
+                <a href="/login"
+                   class="block mt-4 lg:inline-block lg:mt-0 text-black hover:text-gray-500 mr-4 text-l border-b-2 border-red-600 lg:border-0">
+                    Login
+                </a>
+            {% endif %}
         </div>
     </div>
 </nav>
 <div class="w-full h-8 bg-red-600"></div>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="w-full h-8 border-red-600">
+            <ul class=''>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+{% endwith %}
 <div class="container mx-auto pt-6">
     {% block content %}
     {% endblock %}

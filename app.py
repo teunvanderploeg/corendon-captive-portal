@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, session, flash, redirect, url_for
 from flask_mysqldb import MySQL
-
+import requests
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'SUPER SECRET KEY'
@@ -62,6 +62,18 @@ def get_user(bookings_number, name):
 def logout():
     session['name'] = None
     return redirect(url_for('home'))
+
+@app.route("/het-weer")
+def het_weer():
+    weather_information = get_weather_information()
+
+    return render_template("weather.html", weather_information=weather_information, length=len(weather_information['time']))
+
+
+def get_weather_information():
+    url = 'https://api.open-meteo.com/v1/forecast?latitude=52.37&longitude=4.89&hourly=temperature_2m'
+    response = requests.get(url)
+    return response.json()['hourly']
 
 
 if __name__ == '__main__':

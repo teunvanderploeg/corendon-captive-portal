@@ -33,16 +33,7 @@ def login():
         name = request.form.get('name')
         bookings_number = request.form.get('bookings-number')
 
-        # Start sql connection
-        cursor = mysql.connection.cursor()
-        sql = "SELECT ticket_number, name FROM users WHERE ticket_number = %s AND name = %s"
-        arguments = (bookings_number, name)
-
-        # Execute the sql string with the arguments
-        cursor.execute(sql, arguments)
-
-        # Get the data from the sql statement
-        user = cursor.fetchone()
+        user = get_user(bookings_number, name)
 
         if user:
             # Set the name in the session
@@ -52,6 +43,19 @@ def login():
             # If there is no valide user return with an error
             flash('Verkeerde naam of ticket nummer')
             return render_template("login.html")
+
+
+def get_user(bookings_number, name):
+    # Start sql connection
+    cursor = mysql.connection.cursor()
+    sql = "SELECT ticket_number, name FROM users WHERE ticket_number = %s AND name = %s"
+    arguments = (bookings_number, name)
+
+    # Execute the sql string with the arguments
+    cursor.execute(sql, arguments)
+
+    # Get the data from the sql statement and return it
+    return cursor.fetchone()
 
 
 @app.route("/logout")

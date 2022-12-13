@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, session, flash, redirect, url_for
 from flask_mysqldb import MySQL
 import requests
+import os
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'SUPER SECRET KEY'
@@ -32,12 +33,19 @@ def login():
         # Get the form values
         name = request.form.get('name')
         bookings_number = request.form.get('bookings-number')
+        terms_and_conditions = request.form.get('terms-and-conditions')
 
         user = get_user(bookings_number, name)
+        print(terms_and_conditions)
+        if terms_and_conditions is None:
+            # If the terms of serves is not accept return with an error
+            flash('De algemene voorwaarden moeten geaccepteerd worden')
+            return render_template("login.html")
 
         if user:
             # Set the name in the session
             session['name'] = user[1]
+            # os.system(f'sudo iptables -I FORWARD -s {request.remote_addr} -j ACCEPT')
             return redirect(url_for('home'))
         else:
             # If there is no valide user return with an error
@@ -45,11 +53,11 @@ def login():
             return render_template("login.html")
 
 
-def get_user(bookings_number, name):
+def get_user(bookings_number, input_name):
     # Start sql connection
     cursor = mysql.connection.cursor()
     sql = "SELECT ticket_number, name FROM users WHERE ticket_number = %s AND name = %s"
-    arguments = (bookings_number, name)
+    arguments = (bookings_number, input_name)
 
     # Execute the sql string with the arguments
     cursor.execute(sql, arguments)
@@ -79,10 +87,6 @@ def get_weather_information():
     url = 'https://api.open-meteo.com/v1/forecast?latitude=52.37&longitude=4.89&hourly=temperature_2m'
     response = requests.get(url)
     return response.json()['hourly']
-
-def need_to_login():
-    # Checks if the user hase a username
-    print('hi')
 
 
 if __name__ == '__main__':

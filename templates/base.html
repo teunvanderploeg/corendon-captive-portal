@@ -54,13 +54,14 @@
 <div class="w-full h-8 bg-red-600"></div>
 {% with messages = get_flashed_messages() %}
     {% if messages %}
-        <div class="w-full h-8 border-red-600">
-            <ul class=''>
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        </div>
+        <ul>
+            {% for message in messages %}
+                <li class="bg-red-100 mt-2 w-1/2 mx-auto border border-red-400 text-red-700 px-4 py-3 rounded relative text-center">
+                    <strong class="font-bold">Error!</strong>
+                    <span class="block sm:inline">{{ message }}</span>
+                </li>
+            {% endfor %}
+        </ul>
     {% endif %}
 {% endwith %}
 <div class="container mx-auto pt-6">

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Home{% endblock %}
+{% block title %}Login{% endblock %}
 {% block content %}
     <div class="relative px-4 sm:rounded-3xl sm:p-20">
         <div class="min-h-full flex flex-col justify-center sm:px-6 lg:px-8">
@@ -30,9 +30,9 @@
 
                         <div class="flex items-center justify-between">
                             <div class="flex items-center">
-                                <input id="algemene-voorwaarden" name="algemene-voorwaarden" type="checkbox"
+                                <input id="terms-and-conditions" name="terms-and-conditions" type="checkbox" required
                                        class="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded">
-                                <label for="algemene-voorwaarden" class="ml-2 block text-sm text-gray-900">Algemene
+                                <label for="terms-and-conditions" class="ml-2 block text-sm text-gray-900">Algemene
                                     voorwaarden accepteren</label>
                             </div>
                         </div>

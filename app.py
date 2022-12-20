@@ -36,7 +36,7 @@ def login():
         terms_and_conditions = request.form.get('terms-and-conditions')
 
         user = get_user(bookings_number, name)
-        print(terms_and_conditions)
+
         if terms_and_conditions is None:
             # If the terms of serves is not accept return with an error
             flash('De algemene voorwaarden moeten geaccepteerd worden')
@@ -62,13 +62,19 @@ def get_user(bookings_number, input_name):
     # Execute the sql string with the arguments
     cursor.execute(sql, arguments)
 
-    # Get the data from the sql statement and return it
-    return cursor.fetchone()
+    # Get the data from the sql statement
+    user = cursor.fetchone()
+
+    # Close the connection
+    cursor.close()
+
+    # Return the user
+    return user
 
 
 @app.route("/logout")
 def logout():
-    session['name'] = None
+    session.clear()
     return redirect(url_for('home'))
 
 @app.route("/het-weer")

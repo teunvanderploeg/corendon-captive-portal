@@ -2,6 +2,8 @@ DROP DATABASE IF EXISTS captive_portal_corendon;
 
 CREATE SCHEMA captive_portal_corendon;
 
+USE captive_portal_corendon;
+
 CREATE TABLE captive_portal_corendon.users
 (
     ticket_number INT UNIQUE,

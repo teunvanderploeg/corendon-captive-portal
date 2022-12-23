@@ -1,4 +1,4 @@
-DROP DATABASE captive_portal_corendon;
+IF EXISTS DROP DATABASE captive_portal_corendon;
 
 CREATE SCHEMA captive_portal_corendon;
 

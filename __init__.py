@@ -39,7 +39,7 @@ def create_app():
 
             if terms_and_conditions is None:
                 # If the terms of serves is not accept return with an error
-                flash('De algemene voorwaarden moeten geaccepteerd worden')
+                flash('The terms and conditions must be accepted')
                 return render_template("login.html")
 
             if user:
@@ -49,7 +49,7 @@ def create_app():
                 return redirect(url_for('home'))
             else:
                 # If there is no valide user return with an error
-                flash('Verkeerde naam of ticket nummer')
+                flash('Wrong name or ticket number')
                 return render_template("login.html")
 
     def get_user(bookings_number, input_name):

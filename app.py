@@ -10,8 +10,8 @@ def create_app():
     app.config['SECRET_KEY'] = 'SUPER SECRET KEY'
     # Set up the database settings
     app.config['MYSQL_HOST'] = 'localhost'
-    app.config['MYSQL_USER'] = 'user'
-    app.config['MYSQL_PASSWORD'] = 'user'
+    app.config['MYSQL_USER'] = 'flask'
+    app.config['MYSQL_PASSWORD'] = 'password1'
     app.config['MYSQL_DB'] = 'captive_portal_corendon'
 
     mysql = MySQL(app)

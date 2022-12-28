@@ -10,6 +10,9 @@ CREATE TABLE captive_portal_corendon.users
     name          varchar(255)
 );
 
+CREATE USER 'flask'@'localhost' IDENTIFIED BY 'Rx6022h$bbBGUXCg^9fEP'; -- Change Password !!!
+GRANT ALL PRIVILEGES ON captive_portal_corendon.* TO 'flask'@'localhost';
+
 INSERT INTO captive_portal_corendon.users (ticket_number, name)
 VALUES (55988414,'Eileen Troyer');
 INSERT INTO captive_portal_corendon.users (ticket_number, name)

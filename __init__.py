@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from flask_mysqldb import MySQL
 import requests
@@ -11,7 +13,7 @@ def create_app():
     # Set up the database settings
     app.config['MYSQL_HOST'] = 'localhost'
     app.config['MYSQL_USER'] = 'flask'
-    app.config['MYSQL_PASSWORD'] = 'password1'
+    app.config['MYSQL_PASSWORD'] = 'Rx6022h$bbBGUXCg^9fEP'
     app.config['MYSQL_DB'] = 'captive_portal_corendon'
 
     mysql = MySQL(app)
@@ -45,7 +47,7 @@ def create_app():
             if user:
                 # Set the name in the session
                 session['name'] = user[1]
-                # os.system(f'sudo iptables -I FORWARD -s {request.remote_addr} -j ACCEPT')
+                os.system(f'sudo ipset add whitelisted {request.remote_addr}')
                 return redirect(url_for('home'))
             else:
                 # If there is no valide user return with an error
@@ -73,6 +75,7 @@ def create_app():
     @app.route("/logout")
     def logout():
         session.clear()
+        os.system(f'sudo ipset del whitelisted {request.remote_addr}')
         return redirect(url_for('home'))
 
     @app.route("/het-weer")

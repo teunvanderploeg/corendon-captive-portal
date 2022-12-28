@@ -370,3 +370,5 @@ INSERT INTO captive_portal_corendon.users (ticket_number, name)
 VALUES (44624370,'Richard Mildenberger');
 INSERT INTO captive_portal_corendon.users (ticket_number, name)
 VALUES (85852089,'Cindy Vega');
+INSERT INTO captive_portal_corendon.users (ticket_number, name)
+VALUES (123,'hallo');

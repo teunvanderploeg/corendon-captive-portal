@@ -10,7 +10,7 @@ CREATE TABLE captive_portal_corendon.users
     name          varchar(255)
 );
 
-DROP USER 'flask'@'localhost';
+DROP USER IF EXISTS 'flask'@'localhost';
 CREATE USER 'flask'@'localhost' IDENTIFIED BY 'Rx6022h$bbBGUXCg^9fEP'; -- Change Password !!!
 GRANT ALL PRIVILEGES ON captive_portal_corendon.* TO 'flask'@'localhost';
 

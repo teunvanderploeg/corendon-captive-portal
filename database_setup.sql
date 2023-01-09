@@ -6,8 +6,9 @@ USE captive_portal_corendon;
 
 CREATE TABLE captive_portal_corendon.users
 (
-    ticket_number INT UNIQUE,
-    name          varchar(255)
+    `ticket_number` INT UNIQUE,
+    `name`          varchar(255),
+    primary key (`ticket_number`)
 );
 
 DROP USER IF EXISTS 'flask'@'localhost';

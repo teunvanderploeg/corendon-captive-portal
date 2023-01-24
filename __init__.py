@@ -57,7 +57,7 @@ def create_app():
     def get_user(bookings_number, input_name):
         # Start sql connection
         cursor = mysql.connection.cursor()
-        sql = "SELECT ticket_number, name FROM users WHERE ticket_number = %s AND name = %s"
+        sql = "SELECT ticket_number, name FROM users WHERE ticket_number = %(ticket_number)s AND name = %s"
         arguments = (bookings_number, input_name)
 
         # Execute the sql string with the arguments

@@ -49,6 +49,15 @@ def create_app():
                 session['name'] = user[1]
                 os.system(f'sudo ipset add whitelisted {request.remote_addr}')
                 return redirect(url_for('home'))
+            
+            sql_list = ["'", '"', "=", "-"]
+        
+            for i in bookings_number and name:
+                # if the user wants to insert ', ", =, or -
+                if i in sql_list:
+                    flash("""You cannot enter ' " = - """)
+                    return render_template("login.html")
+            
             else:
                 # If there is no valide user return with an error
                 flash('Wrong name or ticket number')

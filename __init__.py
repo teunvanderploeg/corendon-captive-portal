@@ -50,6 +50,11 @@ def create_app():
                 os.system(f'sudo ipset add whitelisted {request.remote_addr}')
                 return redirect(url_for('home'))
             
+            else:
+                # If there is no valide user return with an error
+                flash('Wrong name or ticket number')
+                return render_template("login.html")
+                        
             sql_list = ["'", '"', "=", "-"]
         
             for i in bookings_number and name:
@@ -57,11 +62,6 @@ def create_app():
                 if i in sql_list:
                     flash("""You cannot enter ' " = - """)
                     return render_template("login.html")
-            
-            else:
-                # If there is no valide user return with an error
-                flash('Wrong name or ticket number')
-                return render_template("login.html")
 
     def get_user(bookings_number, input_name):
         # Start sql connection
